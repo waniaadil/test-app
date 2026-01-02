@@ -14,9 +14,11 @@ export interface FAQItem {
 
 export interface Testimonial {
   name: string;
-  score: string;
+  role: string;
   text: string;
   image: string;
+  metric?: string;
+  rating: number;
 }
 
 export interface Phase {

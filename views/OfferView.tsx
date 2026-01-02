@@ -1,5 +1,41 @@
 
 import React, { useState } from 'react';
+import { Testimonial } from '../types';
+
+const allTestimonials: Testimonial[] = [
+  { 
+    name: 'Sarah J.', 
+    role: 'Growth Marketing Lead',
+    text: '"Within 3 weeks, my sleep score went from 60 to 92. I feel like a completely different person."', 
+    image: 'https://picsum.photos/100/100?random=1',
+    metric: '92 Sleep Score',
+    rating: 5
+  },
+  { 
+    name: 'Mike T.', 
+    role: 'Engineering Director',
+    text: '"The discipline framework is simple but powerful. Finally reclaimed my mornings for deep work."', 
+    image: 'https://picsum.photos/100/100?random=2',
+    metric: '3hrs Deep Work',
+    rating: 5
+  },
+  { 
+    name: 'Alisha K.', 
+    role: 'Startup Founder',
+    text: '"More energy than I\'ve had in a decade. The reset truly works if you stick to the baseline protocols."', 
+    image: 'https://picsum.photos/100/100?random=3',
+    metric: 'Level 10 Energy',
+    rating: 5
+  },
+  { 
+    name: 'Robert G.', 
+    role: 'HR Consultant',
+    text: '"I used to struggle with consistency. Now, my system runs on autopilot. Worth every cent."', 
+    image: 'https://picsum.photos/100/100?random=4',
+    metric: '90 Day Streak',
+    rating: 5
+  }
+];
 
 interface Props {
   onBack: () => void;
@@ -29,23 +65,29 @@ const OfferView: React.FC<Props> = ({ onBack, onConsult }) => {
         <p className="text-gray-500 dark:text-gray-400 text-sm text-center mt-2 px-6">Featured in top health publications</p>
       </div>
 
-      <div className="flex overflow-x-auto scrollbar-hide pb-8 bg-white dark:bg-background-dark px-4 gap-4">
-        {[
-          { name: 'Sarah J.', text: '"Within 3 weeks, my sleep score went from 60 to 92. I feel like a completely different person."', img: 'https://picsum.photos/100/100?random=1' },
-          { name: 'Mike T.', text: '"The discipline framework is simple but powerful. Finally reclaimed my mornings."', img: 'https://picsum.photos/100/100?random=2' },
-          { name: 'Alisha K.', text: '"More energy than I\'ve had in a decade. The reset truly works if you stick to it."', img: 'https://picsum.photos/100/100?random=3' },
-        ].map((t, i) => (
-          <div key={i} className="flex h-full w-72 flex-col gap-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-[#222] p-4 shrink-0 shadow-sm">
+      {/* Testimonials Grid/Slider */}
+      <div className="flex overflow-x-auto scrollbar-hide pb-8 bg-white dark:bg-background-dark px-4 gap-4 snap-x">
+        {allTestimonials.map((t, i) => (
+          <div key={i} className="flex h-full w-72 flex-col gap-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-[#1a1a1a] p-5 shrink-0 shadow-sm snap-center">
             <div className="flex items-center gap-3">
-              <img className="w-10 h-10 rounded-full object-cover" src={t.img} alt={t.name} />
+              <img className="w-12 h-12 rounded-full object-cover border-2 border-white dark:border-gray-700" src={t.image} alt={t.name} />
               <div>
-                <p className="text-primary dark:text-white text-sm font-semibold">{t.name}</p>
-                <div className="flex text-yellow-500">
-                  {[1, 2, 3, 4, 5].map(s => <span key={s} className="material-symbols-outlined text-sm">star</span>)}
-                </div>
+                <p className="text-primary dark:text-white text-sm font-bold font-display">{t.name}</p>
+                <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">{t.role}</p>
               </div>
             </div>
-            <p className="text-primary dark:text-gray-300 text-sm font-medium leading-normal italic">{t.text}</p>
+            <div className="flex flex-col gap-2">
+              <div className="flex text-yellow-500">
+                {[1, 2, 3, 4, 5].map(s => <span key={s} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>)}
+              </div>
+              <p className="text-primary dark:text-gray-300 text-sm font-medium leading-relaxed italic">{t.text}</p>
+            </div>
+            {t.metric && (
+              <div className="mt-auto pt-3 border-t border-gray-200 dark:border-gray-800 flex items-center gap-2">
+                <span className="material-symbols-outlined text-green-500 text-[18px]">trending_up</span>
+                <span className="text-xs font-bold text-green-600 dark:text-green-400">{t.metric}</span>
+              </div>
+            )}
           </div>
         ))}
       </div>

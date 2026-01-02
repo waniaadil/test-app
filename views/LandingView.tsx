@@ -1,5 +1,25 @@
 
 import React from 'react';
+import { Testimonial } from '../types';
+
+const previewTestimonials: Testimonial[] = [
+  {
+    name: 'David Chen',
+    role: 'Principal Engineer',
+    text: 'The sleep protocols alone are worth the price. My Oura Ring readiness scores have been consistently over 85.',
+    image: 'https://picsum.photos/100/100?random=21',
+    metric: '+22% Deep Sleep',
+    rating: 5
+  },
+  {
+    name: 'Sarah Miller',
+    role: 'Product Lead',
+    text: 'I used to crash at 3 PM. Now my energy is steady until I hit the pillow. The hydration protocol was the missing link.',
+    image: 'https://picsum.photos/100/100?random=22',
+    metric: 'Zero Afternoon Slumps',
+    rating: 5
+  }
+];
 
 interface Props {
   onNext: () => void;
@@ -7,7 +27,7 @@ interface Props {
 
 const LandingView: React.FC<Props> = ({ onNext }) => {
   return (
-    <div className="animate-in fade-in duration-500">
+    <div className="animate-in fade-in duration-500 pb-20">
       {/* Hero */}
       <div className="flex flex-col gap-6 p-6 pt-8 items-center text-center">
         <div className="inline-flex items-center rounded-full border border-primary/10 bg-white dark:bg-white/10 dark:border-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary dark:text-white shadow-sm">
@@ -73,8 +93,34 @@ const LandingView: React.FC<Props> = ({ onNext }) => {
         </div>
       </div>
 
+      {/* Testimonial Preview */}
+      <div className="px-4 py-8 flex flex-col gap-4">
+        <h3 className="text-center text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Real Results from Real Systems</h3>
+        <div className="grid grid-cols-1 gap-4">
+          {previewTestimonials.map((t, idx) => (
+            <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-3">
+              <div className="flex justify-between items-start">
+                <div className="flex items-center gap-3">
+                  <img src={t.image} className="w-10 h-10 rounded-full object-cover" alt={t.name} />
+                  <div>
+                    <p className="font-bold text-sm text-primary dark:text-white">{t.name}</p>
+                    <p className="text-[11px] text-gray-500">{t.role}</p>
+                  </div>
+                </div>
+                {t.metric && (
+                  <span className="text-[10px] font-bold bg-primary/5 dark:bg-white/5 text-primary dark:text-white px-2 py-1 rounded">
+                    {t.metric}
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-300 italic leading-relaxed">"{t.text}"</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* The Analysis */}
-      <div className="flex flex-col pt-10 pb-2 px-6">
+      <div className="flex flex-col pt-6 pb-2 px-6">
         <span className="text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">The Analysis</span>
         <h2 className="text-primary dark:text-white text-3xl font-extrabold leading-tight tracking-tight font-display">
           Why Your Health Hasn’t Improved (Yet)
