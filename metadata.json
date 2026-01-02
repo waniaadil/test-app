@@ -1,0 +1,7 @@
+{
+  "name": "Copy of The 90-Day Health Reset",
+  "description": "A comprehensive system-based health optimization platform designed for high-performers to rebuild sleep, energy, and discipline.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
